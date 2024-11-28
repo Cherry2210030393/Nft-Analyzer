@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload NFT Dataset</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #000;
+            overflow-x: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Parallax Section */
+        .parallax {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://cdn.pixabay.com/photo/2021/12/06/10/20/non-fungible-token-6849846_1280.jpg') center center/cover no-repeat;
+            background-attachment: fixed;
+            z-index: -2;
+            filter: brightness(0.7);
+        }
+
+        /* Glassmorphism Effect */
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 40px;
+            backdrop-filter: blur(15px);
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 1s ease-in-out forwards 1s;
+            text-align: center;
+            opacity: 0;
+        }
+
+        /* Upload Box */
+        .upload-box {
+            padding: 30px;
+        }
+
+        .upload-box h1 {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 20px;
+            font-weight: 600;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards 1.5s;
+        }
+
+        .upload-box .description {
+            font-size: 1rem;
+            color: #f4f7fa;
+            margin-bottom: 30px;
+            line-height: 1.5;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards 2s;
+        }
+
+        /* Form Styles */
+        .upload-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeInUp 1s ease-out forwards 2.5s;
+        }
+
+        /* File Input */
+        .file-input {
+            font-size: 1rem;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            width: 80%;
+            color: #333;
+            background-color: #fff;
+            transition: border-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .file-input:focus {
+            border-color: #007bff;
+            outline: none;
+            transform: scale(1.05);
+        }
+
+        /* Upload Button */
+        .upload-btn {
+            background-color: #007bff;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 600;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            width: 80%;
+            max-width: 250px;
+            animation: pulseButton 1.5s ease-in-out infinite;
+        }
+
+        .upload-btn:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .upload-btn:active {
+            background-color: #00408a;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0); }
+        }
+
+        @keyframes pulseButton {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Doodle Styles */
+        .doodle {
+            position: absolute;
+            fill: rgba(255, 255, 255, 0.6);
+            animation: floatDoodle 5s infinite;
+            z-index: -1; /* Ensure doodles are behind the content */
+        }
+
+        .doodle:hover {
+            fill: #007bff;
+            transform: scale(1.1);
+        }
+
+        @keyframes floatDoodle {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
+            100% { transform: translateY(0) rotate(-10deg); }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .upload-box {
+                padding: 20px;
+            }
+
+            .upload-btn {
+                width: 90%;
+            }
+
+            .file-input {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Parallax Section with Background Image -->
+    <div class="parallax"></div>
+
+    <!-- Upload Form Section -->
+    <div class="container">
+        <div class="upload-box">
+            <h1>Upload NFT Dataset</h1>
+            <p class="description">Please upload your NFT dataset in CSV format. This will allow us to visualize the network transactions and analyze the NFT data.</p>
+            <form method="POST" enctype="multipart/form-data" class="upload-form">
+                <input type="file" name="file" required class="file-input">
+                <button type="submit" class="upload-btn">Upload & Analyze</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Animated Doodles -->
+    <svg class="doodle" width="100" height="100" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="40" stroke="white" stroke-width="5" fill="none" />
+    </svg>
+    <svg class="doodle" width="80" height="80" viewBox="0 0 100 100">
+        <rect x="10" y="10" width="80" height="80" stroke="white" stroke-width="5" fill="none" />
+    </svg>
+    <svg class="doodle" width="120" height="120" viewBox="0 0 100 100">
+        <polygon points="50,10 90,90 10,90" stroke="white" stroke-width="5" fill="none" />
+    </svg>
+
+</body>
+</html>
